@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.scase.mapper.StudentMapper">
+    <resultMap id="user" type="com.example.scase.entity.Student">
+        <id column="id" property="id" javaType="long"></id>
+        <result column="name" property="name" javaType="String"></result>
+        <result column="age" property="age" javaType="int"></result>
+        <result column="sex" property="sex" javaType="byte"></result>
+        <result column="num" property="num" javaType="String"></result>
+    </resultMap>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into student (`name`, `age`, `sex`, `num`)
+        values (#{student.name,jdbcType=VARCHAR},
+                #{student.age,jdbcType=INTEGER},
+                #{student.sex,jdbcType=TINYINT},
+                #{student.num,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="get" resultMap="user">
+        select * from student where id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <update id="update" parameterType="com.example.scase.entity.Student" >
+        update student
+            <set>
+                <if test="student.name != null">
+                    name = #{student.name,jdbcType=VARCHAR},
+                </if>
+                <if test="student.age != null">
+                    age = #{student.age,jdbcType=INTEGER},
+                </if>
+                <if test="student.sex != null">
+                    sex = #{student.sex,jdbcType=TINYINT},
+                </if>
+            </set>
+        where id=#{student.id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        delete from student where id=#{id,jdbcType=BIGINT}
+    </delete>
+</mapper>
