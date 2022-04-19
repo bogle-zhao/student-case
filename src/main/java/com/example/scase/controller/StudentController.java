@@ -43,7 +43,7 @@ public class StudentController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public Response<Student> update(@PathVariable("id") Long id) {
+    public Response<Student> delete(@PathVariable("id") Long id) {
         int count = studentMapper.delete(id);
         if (count > 0) {
             return Response.SUCCESS(true);

@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ResCode {
     DATA_NOT_FOUND(404, "数据不存在"),
+    DATA_EXISTS(403, "数据重复"),
     SERVER_ERROR(500, "服务器错误")
     ;
 
